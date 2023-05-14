@@ -1,4 +1,4 @@
-package com.example.jpabasics;
+package com.example.jpabasics.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ import lombok.Setter;
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
 
     private int age;
@@ -25,8 +26,7 @@ public class Student {
     private int marks;
 
 
-
-    @OneToOne(mappedBy = "student")
+    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
     LibraryCard libraryCard;
 
 

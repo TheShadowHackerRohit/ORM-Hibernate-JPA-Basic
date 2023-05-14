@@ -1,5 +1,8 @@
-package com.example.jpabasics;
+package com.example.jpabasics.controller;
 
+import com.example.jpabasics.Department;
+import com.example.jpabasics.service.StudentService;
+import com.example.jpabasics.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +16,8 @@ public class StudentController {
     StudentService studentService;
 
     @PostMapping("/add")
-    public String add(@RequestBody Student student){
-        return studentService.add(student);
+    public String add(@RequestBody Student student, @RequestParam Department department){
+        return studentService.add(student,department);
     }
 
     @GetMapping("/get-student-by-id/{id}")
@@ -44,6 +47,19 @@ public class StudentController {
         return studentService.deleteAll();
     }
 
-//    @GetMapping("/get-student-by-age")
-//    public List<>
+    @GetMapping("/get-student-by-age")
+    public List<String> getAllByAge(@RequestParam int age){
+        return studentService.getAllByAge(age);
+    }
+
+
+    @GetMapping("/get-student-by-age_and_marks")
+    public List<String> getByAgeMarks(@RequestParam int age,@RequestParam int marks){
+        return studentService.getByAgeMarks(age,marks);
+    }
+
+    @GetMapping("/get-age_greater")
+    public List<String> getAllByAgeGreater(@RequestParam int age){
+        return studentService.getAllByAgeGreater(age);
+    }
 }
